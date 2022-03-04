@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      #grid{
+        border:5px solid pink;
+        display:grid;
+        grid-template-columns: 2fr 1fr;
+        /* fr이건 배율이다. 그냥 px쓰면 px크기로 고정*/
+      }
+      div{
+        border:5px solid grey;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = "grid">
+      <div>navigation</div>
+      <div>article</div>
+    </div>
+  </body>
+</html>

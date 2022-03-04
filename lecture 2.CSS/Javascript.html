@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <title>WEB2 - CSS</title>
+  <meta charset="utf-8">
+  <style>
+    a {
+      color:black;
+      /* a 중괄호는 선택자라고 한다. (selecter) */
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size:45px;
+      text-align: center;
+      border-bottom:1px solid gray;
+      margin:0;
+      padding:20px;
+    }
+
+    ol{
+      border-right:1px solid gray;
+      /*border-right때문에 선이 생긴다.*/
+      width:100px;
+      margin:0;
+      padding:20px;
+    }
+
+    .saw {
+      color:gray
+    }
+
+    #active{
+      color:red
+      <!-- .을 이용하면 맨 뒤에 있는 .선택자가 최종으로 적용된다. -->
+    }
+    /* 하지만 #을 이용하면 순서에 상관없이 그게 최종으로 적용이 된다. */
+
+    #grid{
+      display: grid;
+      grid-template-columns: 150px 1fr;
+    }
+
+    #grid ol{
+      /*ol중에 그리드 아이디 안에 있는*/
+      padding-left:20px;
+    }
+
+    #grid #article{
+      padding-left:20px;
+    }
+
+    @media(max-width:800px){
+      #grid{
+        display: block;
+      }
+      ol{
+        border-right:none;
+      }
+      h1 {
+        border-bottom:none;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <h1><a href="index.html">WEB</a></h1>
+  <div id="grid">
+    <ol>
+      <li><a href="html.html"class="saw">HTML</a></li>
+      <li><a href="css.html"class="saw active">CSS</a></li>
+      <!-- saw 와 active 여러 개의 속성을 이용할 수 있다. -->
+      <li><a href="Javascript.html"class="saw">JavaScript</a></li>
+    </ol>
+    <!-- <ol>
+      <li><a href="1.html"><font color = "red">HTML</font></a></li>
+      <li><a href="2.html"><font color = "red">CSS</font></a></li>
+      <li><a href="3.html"><font color = "red">JavaScript</font></a></li>
+    </ol> -->
+    <!-- style은 head에 넣어서 사용해준다. -->
+    <div id="article">
+    <h2>Javascript</h2>
+    <p>
+      자바스크립트이다.
+      <p><img src="coding.png" width="70%"></p>
+      <p><iframe width="70%" height="315" src="https://www.youtube.com/embed/j2ut_vPMJns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+    </p>
+  </div>
+  </div>
+</body>
+</html>
