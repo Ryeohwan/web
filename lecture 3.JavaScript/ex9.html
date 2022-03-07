@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Function</h1>
+    <h2>Basic</h2>
+    <ul>
+      <script>
+        function two(){
+          document.write('<li>2</li>');
+          document.write('<li>3</li>');
+        }
+        document.write('<li>1</li>');
+        two();
+        document.write('<li>1</li>');
+        two();
+      </script>
+    </ul>
+    <h2>Parameter & Argument</h2>
+    <script>
+      function sum(a,b){
+        document.write(a+b+'<br>');
+      }
+      // 매개변수를 사용하는 함수
+      function sumColorRed(a,b){
+        document.write('<div style ="color:Red">'+(a+b)+'</div><br>');
+      }
+      sum(8,7);
+      sumColorRed(4,5);
+    </script>
+    <h2>Return</h2>
+    <script>
+      function sum2(a,b){
+        return a+b;
+      }
+      document.write(sum2(2,3)+'<br>');
+      document.write('<div style ="color:Red">'+sum2(2,3)+'</div>');
+      document.write('<div style ="font-size:3rem;">'+sum2(2,3)+'</div><br>');
+    </script>
+  </body>
+</html>
