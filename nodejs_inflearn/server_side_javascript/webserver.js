@@ -7,7 +7,7 @@ http.createServer((req, res) => { //서버 한 대를 만드면서 이 서버에
     'Content-Type': 'text/plain'
   });
   res.end('Hello World\n');  // 이렇게 하면 서버라는 리턴하는데
-}).listen(port, hostname, () => {
+}).listen(port, hostname, () => {  // 이 화살표는 익명함수의 축약형 표시
   console.log(`Server running at http://${hostname}:${port}/`); //그 객체는 리슨메소드 갖고있어서 호출
 });
 // 웹 서버가 되는 코드이다.
@@ -16,3 +16,17 @@ http.createServer((req, res) => { //서버 한 대를 만드면서 이 서버에
 // 만들 수 있는 기반을 제공한다.
 
 //require 노드제이에스에서 제공하는 http라는 모듈이 요구된다.
+
+
+var server = http.createServer(function(req, res){
+  res.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('Hello World\n');
+});
+server.listen(port, hostname, function(){
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+// 위의 덩어리는 이 두 줄의 형태를 자세하게 푼 것이다.
+
+// 노드를 이용해서 만들어진 프레임워크로 빠르게 써보자.
