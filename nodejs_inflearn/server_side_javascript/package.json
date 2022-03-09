@@ -10,9 +10,15 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ryeohwan/web/tree/main/nodejs_inflearn/server_side_javascript.git"
+    "url": "git+https://github.com/Ryeohwan/web.git#main"
   },
   "dependencies": {
+    "express": "^4.17.3",
+    "uglify": "^0.1.5",
     "underscore": "^1.13.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Ryeohwan/web/issues"
+  },
+  "homepage": "https://github.com/Ryeohwan/web/tree/main#readme"
 }
