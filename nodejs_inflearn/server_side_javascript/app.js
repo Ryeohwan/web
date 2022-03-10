@@ -4,7 +4,16 @@
 var express = require('express');
 var app = express();
 // 이런 사회적 약속
+const path = require('path');
+app.locals.pretty = true;
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(__dirname + '/public')); // 정적인 파일이 위치할 디렉토리
+
+
+app.get("/template", (req, res) => {
+    res.render("temp", {time:Date(), _title:'Pug'});  // 객체를 넣어준다. 이렇게 변수를 사용해줄 수 있다.
+});
 
 app.get('/',function(req, res){
   res.send('Hello friend!');
@@ -42,7 +51,7 @@ app.get('/dynamic', function(req, res){ // 다시 실행시켜야 변경사항 �
     <body>
       hello hoihoi!
       <ul>
-      ${lis}   //이렇게 해야 변수로써 쓸 수 있다.
+      ${lis}   <!--이렇게 해야 변수로써 쓸 수 있다. -->
       </ul>
       ${time}
     </body>
