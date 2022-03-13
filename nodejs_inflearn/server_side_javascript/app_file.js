@@ -16,8 +16,14 @@ app.listen(4000, function(){
 })
 
 app.get('/topic/new',function(req, res){
-  res.render('new');
-})
+  fs.readdir('data',function(err, files){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    }
+    res.render('new', {topics:files});
+  });
+});
 
 app.post('/topic', function(req, res){
   var title = req.body.title;
@@ -31,33 +37,48 @@ app.post('/topic', function(req, res){
       // 자세한 에러리포팅은 밝히면 안된다. 보안 취약점이 될 수 있다.
       res.status(500).send('Internal Server Error');
     }
-    res.send('please succes!');
+    res.redirect('/topic/'+title);
+    // redirect는 다시 그쪽으로 보내버릴 때 쓰는 것.
   });
 });
 
-app.get('/topic',function(req,res){
+app.get(['/topic','/topic/:id'],function(req,res){
   fs.readdir('data',function(err, files){
     if(err){
       console.log(err);
       res.status(500).send('Internal Server Error');
     }
-    res.render('view', {topics:files});
+    //id 있을 때
+    var id = req.params.id;
+    if(id){
+      fs.readFile('data/'+id,'utf8',function(err, data){
+        if(err){
+          console.log(err);
+          res.status(500).send('Internal Server Error');
+        }
+        res.render('view', {topics:files, title:id, discription:data});
+      })
+    }
+    else{
+      res.render('view', {topics:files, title:'welcome', discription:'Hello Javascript'});
+      // 홈페이지부분을 만드는 것이다.
+    }
   })
 });
 
-app.get('/topic/:id',function(req,res){
-  var id = req.params.id;
-  fs.readdir('data',function(err, files){
-    if(err){
-      console.log(err);
-      res.status(500).send('Internal Server Error');
-    }
-    fs.readFile('data/'+id,'utf8',function(err, data){
-      if(err){
-        console.log(err);
-        res.status(500).send('Internal Server Error');
-      }
-      res.render('view', {topics:files, title:id, discription:data});
-    })
-  })
-})
+// app.get('/topic/:id',function(req,res){
+//   var id = req.params.id;
+//   fs.readdir('data',function(err, files){
+//     if(err){
+//       console.log(err);
+//       res.status(500).send('Internal Server Error');
+//     }
+//     fs.readFile('data/'+id,'utf8',function(err, data){
+//       if(err){
+//         console.log(err);
+//         res.status(500).send('Internal Server Error');
+//       }
+//       res.render('view', {topics:files, title:id, discription:data});
+//     })
+//   })
+// })
