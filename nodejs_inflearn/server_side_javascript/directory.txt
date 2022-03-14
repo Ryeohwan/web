@@ -2,3 +2,5 @@ cd Onedrive/바탕 화면/web/nodejs_inflearn/server_side_javascript
 
 파일목록: dir
 노드제이에스로 실행시킬 때: node hello.js
+
+cd Onedrive/바탕 화면/web/lecture 4.Node.js
