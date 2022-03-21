@@ -34,20 +34,14 @@ var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
-
     if(pathname == '/'){
       if(queryData.id === undefined){
-
           fs.readdir('./data',function(err, filelist){
-            console.log(filelist);
             var title = 'Welcome';
             var description = 'Hello, Node.js';
-
             var list = templayeList(filelist);
-
             var template = templateHTML(title, list, `<h2>${title}</h2>
             <p>${description}</p>`);
-
             response.writeHead(200);
             response.end(template);
           });
@@ -58,7 +52,6 @@ var app = http.createServer(function(request,response){
             var list = templayeList(filelist);
             var template = templateHTML(title, list, `<h2>${title}</h2>
             <p>${description}</p>`);
-
             response.writeHead(200);
             response.end(template);
           });
@@ -68,9 +61,5 @@ var app = http.createServer(function(request,response){
       response.writeHead(404); // 헤드가 200이라는 것은 서버가 브라우저에게 성공적
       response.end('Not found');
     }
-
-
-
-
 });
 app.listen(3000);
