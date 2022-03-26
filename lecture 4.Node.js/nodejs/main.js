@@ -5,6 +5,8 @@ var qs = require('querystring');
 //refactoring 기능은 동일하게 하면서 더 보기 쉽게 하는 것
 // 객체나 함수나 배열을 사용하여서 유지보수 쉬운 형태로 만들자.
 var template = require('./lib/template.js');
+var path = require('path');
+var sanitizeHTML = require('sanitize-html');
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -23,13 +25,18 @@ var app = http.createServer(function(request,response){
           });
       } else {
         fs.readdir('./data',function(err, filelist){
-          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+          var filteredId = path.parse(queryData.id).base
+          fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
             var title = queryData.id;
+            var sanitizedTitle = sanitizeHTML(title);
+            var sanitizedDescription = sanitizeHTML(description, {
+              allowedTags:['h1']
+            });
             var list = template.List(filelist);
-            var html = template.HTML(title, list, `<h2>${title}</h2>
-            <p>${description}</p>`, `<a href="/create">create</a> <a href="/update?id=${title}">update</a>
+            var html = template.HTML(title, list, `<h2>${sanitizedTitle}</h2>
+            <p>${sanitizedDescription}</p>`, `<a href="/create">create</a> <a href="/update?id=${sanitizedTitle}">update</a>
             <form action='delete_process' method='post'>
-              <input type='hidden' name='id' value='${title}'>
+              <input type='hidden' name='id' value='${sanitizedTitle}'>
               <input type= 'submit' value='delete'>
             </form>`);
             response.writeHead(200);
@@ -70,7 +77,8 @@ var app = http.createServer(function(request,response){
     }
     else if (pathname === '/update'){
       fs.readdir('./data',function(err, filelist){
-        fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+        var filteredId = path.parse(queryData.id).base
+        fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
           var title = queryData.id;
           var list = template.List(filelist);
           var html = template.HTML(title, list, `
@@ -116,7 +124,8 @@ var app = http.createServer(function(request,response){
       request.on('end',function(){
         var post = qs.parse(body);
         var id = post.id;
-        fs.unlink(`data/${id}`, function(error){
+        var filteredId = path.parse(id).base
+        fs.unlink(`data/${filteredId}`, function(error){
           response.writeHead(302, {Location: encodeURI(`/`)});
           response.end();
         })
