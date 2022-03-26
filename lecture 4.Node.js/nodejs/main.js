@@ -4,35 +4,7 @@ var url = require('url');
 var qs = require('querystring');
 //refactoring 기능은 동일하게 하면서 더 보기 쉽게 하는 것
 // 객체나 함수나 배열을 사용하여서 유지보수 쉬운 형태로 만들자.
-var template = {
-  HTML:function(title, list, body, update){
-    return `
-    <!doctype html>
-    <html>
-    <head>
-      <title>WEB1 - ${title}</title>
-      <meta charset="utf-8">
-    </head>
-    <body>
-      <h1><a href="/">WEB</a></h1>
-      ${list}
-      ${update}
-      ${body}
-    </body>
-    </html>
-    `;
-  },List:function (filelist){
-    var list = `<ul>`;
-    var i = 0;
-    while(i < filelist.length){
-      list += `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-      i += 1;
-    }
-    list += `</ul>`;
-    return list
-  }
-}
-
+var template = require('./lib/template.js');
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -48,7 +20,6 @@ var app = http.createServer(function(request,response){
             <p>${description}</p>`, `<a href="/create">create</a>`);
             response.writeHead(200);
             response.end(html);
-
           });
       } else {
         fs.readdir('./data',function(err, filelist){
