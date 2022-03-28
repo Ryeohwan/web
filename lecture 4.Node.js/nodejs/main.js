@@ -1,4 +1,4 @@
-var http = require('http');
+var http = require('http');  // 모듈을 가져왔다.
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
@@ -136,4 +136,4 @@ var app = http.createServer(function(request,response){
       response.end('Not found');
     }
 });
-app.listen(3000);
+app.listen(3000);  // 요청에 대해 응답할 수 있도록 구동시키는 것.

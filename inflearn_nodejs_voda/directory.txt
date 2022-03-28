@@ -1,1 +1,3 @@
 cd Desktop/cd web/cd inflearn_nodejs_voda
+
+cd Onedrive/바탕 화면/web/inflearn_nodejs_voda
