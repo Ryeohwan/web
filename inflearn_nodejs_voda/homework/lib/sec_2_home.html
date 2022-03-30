@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>search form</title>
+  </head>
+  <body>
+    <h1>Hi here is ryeoever!</h1>
+    <form action="/search_post" method="post">
+      <input type="text" name='search'>
+    </form>
+    <button class='ajaxsearch'>search</button>
+    <div class="result"></div>
+    <script>
+      document.querySelector('.ajaxsearch').addEventListener('click', function(){
+        var inputdata = document.forms[0].elements[0].value;
+        sendAjax('/ajax_search',inputdata);
+      });
+
+      function sendAjax(url, data){
+        var data = {'search': data};
+        data = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type','application/json');
+        // 서버로 보낼 때 json 형태의 데이터 보내는데 application/json 형태로 보내야
+        xhr.send(data);
+        xhr.addEventListener('load', function(){
+          var result = JSON.parse(xhr.responseText);
+          if(result.result !== 'ok') return;
+          document.querySelector('.result').innerHTML = result.search +'와 연관된 것은'+`<br>`+'something else'+`<br>`+'Where is Seongnam'+`<br>`+'Search Github';
+        });
+      }
+    </script>
+  </body>
+</html>
