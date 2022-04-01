@@ -13,7 +13,7 @@
     <div class="result"></div>
     <script>
       document.querySelector('.ajaxsend').addEventListener('click', function(){
-        var inputdata = document.forms[0].elements[0].value;
+        var inputdata = document.forms[0].elements[0] .value;
         // forms[0]로 폼에 접근 elements는 인풋타입 value는 입력한 값이다.
         // sendAjax('http://127.0.0.1:3000/ajax_send_email',inputdata);
         // 이렇게 하니까 안된다. cors 문제가 자꾸 뜨는데 앞에꺼 다 지워주니까 된다.

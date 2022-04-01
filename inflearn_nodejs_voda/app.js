@@ -5,6 +5,8 @@ app.use(express.static('public'));
 var bodyParser = require('body-Parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));  // 인코딩은 아스키형태를 다른 형태로 치환해서 보내는 것이다. 처리가 쉽
+var main = require('./router/main');
+
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -17,42 +19,15 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+
+
 app.set('view engine','ejs');
 app.listen(3000,function(){
   console.log('start express server on port 3000');
 });
 
+app.use('/main', main); // 메인에 대한 라우터는 이걸 써라
 
 app.get('/',function(req, res){
     res.sendFile(__dirname+"/public/main.html" );
-});
-
-app.get('/main',function(req, res){
-    res.sendFile(__dirname+"/public/main.html" );
-});
-
-app.post('/email_post', function(req, res){
-  console.log(req.body.email);
-  res.render('email.ejs',{'email': req.body.email});  // 템플릿 엔진 ejs를 사용하였다. express view engine 으로 검색해서 하면 된다. pug
-});
-
-// render 는 응답값을 줄 때 데이터랑 html과 결합된 상태로 클라이언트에 내려주겠다.
-
-app.post('/ajax_send_email', function(req, res){
-  var email = req.body.email;
-  var responseData = {};  // json형태로 주기 위해 오브젝트형태로 초기
-
-
-// query 알려야 한다. db접속위해 connection 객체사용 query 메소드 사
-  var query = connection.query('select name from user where email="' + email + '"' , function(err, rows){
-    if(err) throw err;
-    if(rows[0]){ //첫번째 데이터
-      responseData.result = 'ok'; //log rpws[0]하면 오브젝트형태로 나오기
-      responseData.name = rows[0].name; //.name 으로 써주는거다
-    } else {
-      responseData.result = 'none';
-      responseData.name = " ";
-    }
-    res.json(responseData);  // 비동기로 처리되기에 callback안에서 responce
-  })
 });
