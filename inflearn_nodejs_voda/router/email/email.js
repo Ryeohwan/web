@@ -14,6 +14,18 @@ router.post('/ajax', function(req, res){
   var email = req.body.email;
   var responseData = {};  // json형태로 주기 위해 오브젝트형태로 초기
 
+//database settings
+  var mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host : 'localhost',
+    port : 3306,
+    user : 'ryeo',
+    password : 'todo',
+    database : 'js_study'
+  });
+
+  connection.connect();
+
 
 // query 알려야 한다. db접속위해 connection 객체사용 query 메소드 사
   var query = connection.query('select name from user where email="' + email + '"' , function(err, rows){
