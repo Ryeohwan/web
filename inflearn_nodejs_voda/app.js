@@ -10,7 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var flash = require('connect-flash');  // 메세지를 쉽게 전달해주는 것
-app.use(flash());
+
 
 app.set('view engine','ejs');
 app.listen(3000,function(){
@@ -22,7 +22,7 @@ app.use(session({
  secret: 'keyboard cat',
  resave: false,
  saveUninitialized: true,
- cookie: { secure: true }
+ // cookie: { secure: true } //if use this req.flash doesn't work
 }));
 
 app.use(passport.initialize());

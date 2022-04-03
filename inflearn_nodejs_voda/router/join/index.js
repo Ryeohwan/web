@@ -5,6 +5,7 @@ var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
 //database settings
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -20,7 +21,7 @@ connection.connect();
 router.get('/', function(req, res){
   var msg;
   var errMsg = req.flash('error');
-  if(errMsg) msg = errMsg;
+  if(errMsg)msg = errMsg;
   res.render('join.ejs',{'message' : msg});
 });
 
@@ -43,6 +44,17 @@ router.get('/', function(req, res){
 //   })  // 저 set 으로 간단하게 표현이 가능하고 sql로 json 을 이용할 수 있다.
 // })
 
+//passport serialize
+passport.serializeUser(function(user, done) {  // 세션을 저장해준다.
+  console.log('passport session save:',user.id);
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  console.log('passport session get id', id);
+  done(null, id);  // id 값만 전달해주겠다.
+});
+
 passport.use('local-join', new LocalStrategy({  // local join 이라는 stategy를 불러서 사용하는 것이다.
   usernameField: 'email',
   passwordField: 'password',
@@ -54,7 +66,11 @@ passport.use('local-join', new LocalStrategy({  // local join 이라는 stategy�
       console.log('already existed user');
       return done(null, false, {message: 'your email is already used'}) // 하면 failureRedirect로 간다.
     } else{
-
+      var sql = {email: email, pw: password};
+      var query = connection.query('insert into user set ?', sql, function(err, rows){
+        if(err) throw err
+        return done(null, {'email': email, 'id' : rows.insertId});
+      })
     }
   })
 }));
