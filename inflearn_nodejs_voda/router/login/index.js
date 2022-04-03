@@ -43,9 +43,9 @@ passport.use('local-login', new LocalStrategy({  // local join 이라는 stategy
 }, function(req, email, password, done){
   var query = connection.query('select * from user where email=?', [email], function(err,rows){
     if(err) return done(err);
-    if(rows.length){  // 로그인했는데 주소가 있으면 잘된거다!
-      return done(null, {'email': email, 'id' : rows[0].UID});
-    } else{
+    if(rows.length) {  // 로그인했는데 주소가 있으면 잘된거다!
+      return done(null, {'email': email, 'id' : rows[0].UID})
+    } else {
         return done(null, false, {'message': 'your login is not found'})
     }
   })
@@ -54,13 +54,13 @@ passport.use('local-login', new LocalStrategy({  // local join 이라는 stategy
 // ajax 는 json 콜백을 줘야 한다.
 router.post('/', function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info){
-    if(err) res.statue(500).json(err);
-    if(!user) {return res.status(401).json(info.message); // info 는 추가 메세지를 전송해 준다.
+    if(err) res.status(500).json(err);
+    if(!user) return res.status(401).json(info.message); // info 는 추가 메세지를 전송해 준다.
 
     req.logIn(user, function(err){  // serialize로 보내준다.
       if (err) {return next(err);}
       return res.json(user);
-    })};
+    });
   })(req, res, next);
 })
 

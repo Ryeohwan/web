@@ -29,7 +29,8 @@
         xhr.addEventListener('load', function(){
           var result = JSON.parse(xhr.responseText);
           var resultDiv = document.querySelector('.result');
-          if(result.result !== 'ok') resultDiv.innerHTML = 'Your email is not found'; else resultDiv.innerHTML = result.name; // name이라는 key로 보냈기에
+          if(result.email) resultDiv.innerHTML = 'welcome, ' + result.email+ '!!';
+          else resultDiv.innerHTML = result; // name이라는 key로 보냈기에
         });
       }
     </script>
