@@ -17,4 +17,4 @@ egoing_lecture
 
 
 nova_lecture
-* <a href="(https://equatorial-dingo-69c.notion.site/_nodejs_nova-549fd7debf5c4af594952748b20f8b04" target="_blank">Node.js_inflearn</a>
+* <a href="https://equatorial-dingo-69c.notion.site/_nodejs_nova-549fd7debf5c4af594952748b20f8b04" target="_blank">Node.js_inflearn</a>
