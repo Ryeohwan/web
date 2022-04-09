@@ -7,7 +7,7 @@ Check my **notions**
 
 
 egoing_lecture  
-* [HTML](https://equatorial-dingo-69c.notion.site/web-1-HTML-d94a4766c9444ba3959901c0b37d5d09){:target='_blank'}
+* [HTML](https://equatorial-dingo-69c.notion.site/web-1-HTML-d94a4766c9444ba3959901c0b37d5d09)
 * [CSS](https://equatorial-dingo-69c.notion.site/web-2-CSS-2786cf6bd2d447b3849b618341c2053f)
 * [JavaScript](https://equatorial-dingo-69c.notion.site/web-3-JavaScript-7ebb2d0eb3a6484287ee07210ec12b79)
 * [Node.js](https://equatorial-dingo-69c.notion.site/_web-Node-js-509f936d3d29475694aefe05e103296e)
