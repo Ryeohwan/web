@@ -18,6 +18,7 @@ egoing_lecture
 
 nova_lecture
 * [Node.js_inflearn](https://equatorial-dingo-69c.notion.site/_nodejs_nova-549fd7debf5c4af594952748b20f8b04)
-
-
+---
+**finish!**
+![image](./img/My_study.png)
 <!-- <a href="https://equatorial-dingo-69c.notion.site/web-2-CSS-2786cf6bd2d447b3849b618341c2053f" target="_blank">CSS</a> -->
