@@ -21,4 +21,5 @@ nova_lecture
 ---
 **finish!**
 ![image](https://github.com/Ryeohwan/web/blob/main/img/My_study.PNG)
+
 <!-- <a href="https://equatorial-dingo-69c.notion.site/web-2-CSS-2786cf6bd2d447b3849b618341c2053f" target="_blank">CSS</a> -->
